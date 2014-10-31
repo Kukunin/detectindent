@@ -69,19 +69,9 @@ fun! <SID>SetLocalIndentWidth(num_spaces)
     " so that the user doesn't have to change multiple options if they
     " manually change the value of tabstop
 
-    try
-        " make 'shiftwidth' use the value of 'tabstop'
-        let &l:shiftwidth = 0
-    catch /^Vim\%((\a\+)\)\=:E487/ " the value 0 was not supported before Vim 7.4
-        let &l:shiftwidth = a:num_spaces
-    endtry
+    let &l:shiftwidth = a:num_spaces
 
-    try
-        " make 'softtabstop' use the value of 'shiftwidth'
-        let &l:softtabstop = -1
-    catch /^Vim\%((\a\+)\)\=:E487/ " the value -1 was not supported before Vim 7.4
-        let &l:softtabstop = a:num_spaces
-    endtry
+    let &l:softtabstop = a:num_spaces
 
     let &l:tabstop = a:num_spaces
 endfun
